@@ -1,13 +1,15 @@
 """
-Pose System - To be Tested
+Pose System
 
 Pose system to set room-persistent poses, visible in room descriptions and 
 when looking at the person/object.  This is a simple Attribute that modifies 
 how the characters is viewed when in a room as sdesc + pose. Moving to a 
 new room resets your pose to the default.
 
-NOTES:
--Use Handler instead?
+Currently allows player from being able to pose himself when locked from editting.
+
+TO DO:
+-I currently use "edit" permission to pose objects. Do I want to be more specific?
 
 """
 from evennia import DefaultObject
@@ -110,16 +112,17 @@ class CmdPose(COMMAND_DEFAULT_CLASS):
 
     Usage:
         pose <pose> # Sets pose
-        pose/default # Resets pose
-        pose/default <pose> # Set pose to be reset to
+        pose/reset #Resets pose
+        pose/default <pose> # Set default pose to be reset to
+        
         pose obj = <pose> # Pose another object
-        pose/default obj # Reset another objects pose
+        pose/reset obj # Reset another objects pose
         pose/default obj = <pose> # Set objects pose to reset to
 
     Examples:
         pose leans against the tree
         pose is talking to the barkeep.
-        pose box = is sitting on the floor.
+        pose box = sitting on the floor.
 
     """
 
@@ -128,68 +131,79 @@ class CmdPose(COMMAND_DEFAULT_CLASS):
     switch_options = ("default")
 
     def func(self):
-        "Create the pose"
-        args = self.args
+        """
+        This is the hook function that actually does all the work. It is called
+        by the cmdhandler right after self.parser() finishes, and so has access
+        to all the variables defined therein.
+        """
         caller = self.caller
-        switches = self.switches
+
+        # FIND TARGET FOR COMMAND ---------------------------------------------
+        # If there is an = sign, the target is to the left.
+        if self.rhs:
+            target = self.lhs
+        # If there's no = but it's a reset command, the target will be the argument
+        elif any(switch in self.switches for switch in ["reset"]):
+            target = self.args
+        # Otherwise, it's the caller and will be assigned later
+        else:
+            target = None
         
-        # Reset target/self to default pose
-        if any(switch in switches for switch in ["reset"]):
-            if args:
-                target = caller.search(args)
-                if not target:
-                    return
-            else:
-                target = caller
-            
-            # Is caller permitted to do this?
-            if not target.access(caller, "edit"):
-                caller.msg("You can't pose that.")
-                return
-            
-            if not target.attributes.has("pose"):
-                caller.msg(f"{target.name} cannot be posed.")
-                return
-            
-            target.db.pose = target.attributes.get("pose_default", default = "")
-            return
-        
-        # Handle no arguments
-        if not self.args:
-            caller.msg("Usage: pose <pose> OR pose obj = <pose>")
-        
-        pose = self.rhs if self.rhs else self.lhs
-        target = self.lhs if self.rhs else None
-        
-        # Dress up the pose string
-        if not pose.endswith("."):
-            pose = f"{pose}."
-        
-        # Set target to target or self.
+        # Find target.
         if target:
             target = caller.search(target)
             if not target:
-                return
-            if not target.access(caller, "edit"):
-                caller.msg("You can't pose that.")
-                return
-            if not target.attributes.has("pose"):
-                caller.msg(f"{target.name} cannot be posed.")
+                # caller.search alerts caller of no find.
                 return
         else:
+            # Didn't need to seach for the caller.
             target = self.caller
+        
+        # CHECK WE'RE ALLOWED TO POSE THE TARGET -----------------------------
+        if not target.access(caller, "edit"):
+            caller.msg("You canont pose that.")
+            return
+        if not target.attributes.has("pose"):
+            caller.msg(f"{target.name} cannot be posed.")
+            return
+
+
+        # HANDLE RESET SWITCH ------------------------------------------------
+        # pose/reset
+        # pose/reset obj
+        
+        # Reset target/self to default pose
+        if any(switch in self.switches for switch in ["reset"]):
+            target.db.pose = target.attributes.get("pose_default", default = "")
+            caller.msg(f"Pose of {target.name} has been reset to '{target.name} {target.db.pose}'")
+            return
+
+        # DETERMINE POSE STRING------------------------------------------------
+        pose = self.rhs if self.rhs else self.args
+
+        # Handle no pose given
+        if not pose:
+            caller.msg("Usage: pose <pose> OR pose obj = <pose>")
+
+        # Add punctuation
+        if not pose.endswith("."):
+            pose = f"{pose}."
             
         # Length check pose.
         if len(target.name) + len(pose) > 60:
             caller.msg(f"Your pose '{pose}' is too long.")
             return
-            
-        # Set new default pose
-        if any(switch in switches for switch in ["default"]):
-            target.db.pose_default = pose
-            caller.msg(f"Default pose is now '{target.get_display_name()}'.")
-            return
         
-        # Setting new temporary pose.
+        # HANDLE SETTING DEFAULT POSE STRING-----------------------------------
+        # pose/default <pose>
+        # pose/default obj = <pose>
+        
+        # Set new default pose
+        if any(switch in self.switches for switch in ["default"]):
+            target.db.pose_default = pose
+            caller.msg(f"Default pose of {target.name} is now '{target.name} {pose}'.")
+            return
+
+        # SET POSE STRING -----------------------------------------------------
         target.db.pose = pose
         caller.msg(f"Pose will read '{target.name} {pose}'.")

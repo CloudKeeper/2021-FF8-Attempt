@@ -8,3 +8,9 @@
 21-07-13 06:32:27  |Portal| Webserver-proxy starting on 4001
 21-07-13 06:32:27  |Portal| Portal starting server ... 
 21-07-13 06:32:29  |Portal| Portal starting server ... 
+21-07-13 07:17:21  |Portal| (TCP Port 4001 Closed)
+21-07-13 07:17:21  |Portal| (TCP Port 4002 Closed)
+21-07-13 07:17:21  |Portal| (TCP Port 4000 Closed)
+21-07-13 07:17:21  |Portal| (TCP Port 4006 Closed)
+21-07-13 07:17:21  |Portal| Main loop terminated.
+21-07-13 07:17:21  |Portal| Server Shut Down.

@@ -56,8 +56,9 @@ class CmdDetailLook(default_cmds.CmdLook):
 
     def func(self):
         """
-        Handle the looking. This is a copy of the default look
-        code except for adding in the details.
+        This is the hook function that actually does all the work. It is called
+        by the cmdhandler right after self.parser() finishes, and so has access
+        to all the variables defined therein.
         """
         caller = self.caller
         args = self.args

@@ -21,3 +21,6 @@
 21-07-13 06:32:30 Webserver starting on 4005
 21-07-13 06:32:30 Evennia Server successfully restarted in 'reset' mode.
 21-07-13 06:41:30 [WW] Warning: Idmapper flush called more than once in 5.0 min interval. Check memory usage.
+21-07-13 07:17:21 [..] Server disconnected from the portal.
+21-07-13 07:17:21 Main loop terminated.
+21-07-13 07:17:21 Server Shut Down.
