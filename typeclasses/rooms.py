@@ -21,5 +21,5 @@ class Room(DefaultRoom, detail_system.DetailRoom, ambience_system.AmbientRoom):
     """
     
     # Connected up Detail System.
-    # Connect up Ambience System.
+    # Connected up Ambience System.
     pass

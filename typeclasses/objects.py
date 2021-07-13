@@ -13,7 +13,7 @@ inheritance.
 from evennia import DefaultObject
 from features import invisible_objects
 
-class Object(invisible_objects.RespectInvisibilityMixin, DefaultObject):
+class Object(DefaultObject):
     """
     This is the root typeclass object, implementing an in-game Evennia
     game object, such as having a location, being able to be

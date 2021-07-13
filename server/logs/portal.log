@@ -1,0 +1,10 @@
+21-07-13 06:32:26  |Portal| Loading /home/ec2-user/environment/evennia/evennia/server/portal/portal.py...
+21-07-13 06:32:27  |Portal| Loaded.
+21-07-13 06:32:27  |Portal| twistd 20.3.0 (/home/ec2-user/environment/evenv/bin/python3.7 3.7.10) starting up.
+21-07-13 06:32:27  |Portal| reactor class: twisted.internet.epollreactor.EPollReactor.
+21-07-13 06:32:27  |Portal| AMP starting on 4006
+21-07-13 06:32:27  |Portal| Telnet starting on 4000
+21-07-13 06:32:27  |Portal| Websocket starting on 4002
+21-07-13 06:32:27  |Portal| Webserver-proxy starting on 4001
+21-07-13 06:32:27  |Portal| Portal starting server ... 
+21-07-13 06:32:29  |Portal| Portal starting server ... 

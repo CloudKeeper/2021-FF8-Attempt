@@ -1,11 +1,12 @@
 """
 Details
 
-This defines the Room mixin and commands to implement room detials - non-object
-information stored on the room which a player can look at to recieve a more
-detailed description.
+This is a Room mixin and command to implement Room Detials
 
-NOTES:
+Details are non-object descriptions stored on the room which a player can look
+at to recieve a more detailed description.
+
+TO DO:
 Allow objects other than the room to have details?
 
 """

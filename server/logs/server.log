@@ -1,0 +1,23 @@
+21-07-13 06:32:27 Loading /home/ec2-user/environment/evennia/evennia/server/server.py...
+21-07-13 06:32:28 Loaded.
+21-07-13 06:32:28 twistd 20.3.0 (/home/ec2-user/environment/evenv/bin/python3.7 3.7.10) starting up.
+21-07-13 06:32:28 reactor class: twisted.internet.epollreactor.EPollReactor.
+21-07-13 06:32:28 Webserver starting on 4005
+21-07-13 06:32:28 [..] Initial setup: Creating objects (Account #1 and Limbo room) ...
+21-07-13 06:32:28 [..] Initial setup: Creating default channels ...
+21-07-13 06:32:28 [..] Initial setup: Running at_initial_setup() hook.
+21-07-13 06:32:28 [..] Initial setup: Gathering static resources using 'collectstatic'
+21-07-13 06:32:28 
+21-07-13 06:32:28 0 static files copied to '/home/ec2-user/environment/FinalFantasy8/web/static', 156 unmodified.
+21-07-13 06:32:28 [..] Initial setup complete. Restarting Server once.
+21-07-13 06:32:28 Evennia Server successfully started.
+21-07-13 06:32:29 [..] Server disconnected from the portal.
+21-07-13 06:32:29 Main loop terminated.
+21-07-13 06:32:29 Server Shut Down.
+21-07-13 06:32:29 Loading /home/ec2-user/environment/evennia/evennia/server/server.py...
+21-07-13 06:32:30 Loaded.
+21-07-13 06:32:30 twistd 20.3.0 (/home/ec2-user/environment/evenv/bin/python3.7 3.7.10) starting up.
+21-07-13 06:32:30 reactor class: twisted.internet.epollreactor.EPollReactor.
+21-07-13 06:32:30 Webserver starting on 4005
+21-07-13 06:32:30 Evennia Server successfully restarted in 'reset' mode.
+21-07-13 06:41:30 [WW] Warning: Idmapper flush called more than once in 5.0 min interval. Check memory usage.

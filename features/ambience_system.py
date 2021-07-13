@@ -1,5 +1,5 @@
 """
-Ambience - Works
+Ambience
 
 This is a system for sending intermittent messages to a room to provide
 ambiance. 
@@ -12,13 +12,13 @@ By default:
     Characters return their own messages + the messages of worn clothing.
     Rooms return their own messages + the messages returned by their contents.
     
-A global script set at 30 second intervals determines which rooms have
+A global script set at 120 second intervals determines which rooms have
 players in them and triggers an ambient message picked at random by the
-returned options.
+returned options per room.
 
 Messages are stored in a dictioary on the object: {message:weight,..}
 
-NOTES:
+TO DO:
 - No repeats
 - Ambience messages are tagged
 - Switch to not return ambient_msgs
@@ -125,7 +125,7 @@ class AmbientScript(DefaultScript):
     def at_script_creation(self):
         self.key = "ambiance_script"
         self.desc = "Triggers ambient messages in rooms from contents."
-        self.interval = 180
+        self.interval = 120
         self.persistent = True
 
     def at_repeat(self):

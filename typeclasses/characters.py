@@ -11,7 +11,7 @@ from evennia import DefaultCharacter
 from features import invisible_objects
 
 
-class Character(invisible_objects.RespectInvisibilityMixin, DefaultCharacter):
+class Character(DefaultCharacter):
     """
     The Character defaults to reimplementing some of base Object's hook methods with the
     following functionality:
