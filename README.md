@@ -4,6 +4,8 @@ The pose, pose/reset and pose/default lead to some trickyness defining the
 target. Wasn't as neat as I would like it to be but it should work. Will do
 a testing phase later which may encourage me to refactor it with fresh eyes.
 
+Next I want to work on delayed exits to rely on the pose system.
+
 # 13/07/2021
 Picking this back up after the last time I put it down.
 
