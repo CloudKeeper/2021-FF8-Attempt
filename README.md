@@ -1,3 +1,17 @@
+# 17/07/2021
+Continued work on the Magic Handler by adding some basic methods.
+
+# 17/07/2021
+Began work on the Magic Handler. I like keeping the features largely 
+compartmentalised in it's own files, so that's what I'm doing.
+
+I've made the skeleton set up:
+-I have a basic magic list. I will need to fill this in with each entry having
+a dictionary with more details. I should also consider replacing it with a
+database.
+-I've created the Character Mixin which sets up the Handler and dictionary.
+-I've set up the Handler. Will need to fill in the methodds as required.
+
 # 16/07/2021
 Picking up the delayed exit contrib. I want to add custom messages sitting on
 the exit object. First I'll need to look at the default message system, then 

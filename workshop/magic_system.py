@@ -150,18 +150,18 @@ class MagicHandler(object):
             msg = '`MagicHandler` requires `db.magic` attribute on `{}`.'
             raise MagicException(msg.format(obj))
 
-    # @property
-    # def list(self):
-    #     """
-    #     Returns current party.
+    @property
+    def list(self):
+        """
+        Returns list of Magic kmown to the Character.
 
-    #     Returns:
-    #         party (list): List of current Pokemon objects in party.
+        Returns:
+            magic (list): List of current Magic known to Character.
 
-    #     Returned if:
-    #         obj.party.list
-    #     """
-    #     return self.obj.db.party
+        Returned if:
+            obj.magic.list
+        """
+        return self.obj.db.magic.keys()
 
     # def __str__(self):
     #     """
@@ -187,42 +187,29 @@ class MagicHandler(object):
     #     """
     #     return self.obj.db.party.__iter__()
 
-    # def __len__(self):
-    #     """
-    #     Returns current party length.
+    def __len__(self):
+        """
+        Returns number of Magic known to Character.
 
-    #     Returns:
-    #         length (int): Number of Pokemon objects in current party.
+        Returns:
+            length (int): Number of Magic known to Character.
 
-    #     Returned if:
-    #         len(obj.party)
-    #     """
-    #     return len(self.obj.db.party)
+        Returned if:
+            len(obj.magic)
+        """
+        return len(self.obj.db.magic)
 
-    # @property
-    # def alive(self):
-    #     """
-    #     Returns live Pokemon in current party.
+    def __nonzero__(self):
+        """
+        Support Boolean comparison for Magic held by Character.
 
-    #     Returns:
-    #         party (list): List of current alive Pokemon objects in party.
+        Returns:
+            Boolean: True if holds Magic, False if no Magic.
 
-    #     Returned if:
-    #         obj.party.alive
-    #     """
-    #     return [pokemon for pokemon in self.obj.db.party if pokemon.health]
-
-    # def __nonzero__(self):
-    #     """
-    #     Support Boolean comparison for living party members.
-
-    #     Returns:
-    #         Boolean: True if living party members, False if none.
-
-    #     Returned if:
-    #         if obj.party
-    #     """
-    #     return bool(self.alive)
+        Returned if:
+            if obj.magic
+        """
+        return bool(self.obj.db.magic)
 
     # @property
     # def fainted(self):
@@ -250,58 +237,39 @@ class MagicHandler(object):
     #     """
     #     return self.obj.db.box
 
-    # def add(self, pokemon):
-    #     """
-    #     Add Pokemon to party. If at party maximum, Pokemon will be sent to box.
+    def add(self, magic, number):
+        """
+        Increase selected <magic> by <number> respecting limit of 100.
 
-    #     Returns:
-    #         True (Boolean): Pokemon was added to party successfully.
-    #         False (Boolean): Pokemon was sent to box.
+        Returned if:
+            obj.magic.add("Fire", 10)
+        """
+        try:
+            self.obj.db.magic[magic] = self.obj.db.magic[magic] + number
+        except:
+            msg = "Arguments passed to `MagicHandler.add()` caused an error."
+            raise MagicException(msg)
+        
+        if self.obj.db.magic[magic] > 100:
+            self.obj.db.magic[magic] = 100
+        return
 
-    #     Returned if:
-    #         obj.party.add(<Pokemon>)
-    #     """
-    #     if len(self.obj.db.party) < 6:
-    #         self.obj.db.party.append(pokemon)
-    #         return True
-    #     else:
-    #         self.obj.db.box.append(pokemon)
-    #         return False
+    def remove(self, magic, number = 1):
+        """
+        Reduce selected <magic> by <number>, removing <magic> if 0.
 
-    # def __add__(self, pokemon):
-    #     """
-    #     Add Pokemon to party. If at party maximum, Pokemon will be sent to box.
-
-    #     Returns:
-    #         True (Boolean): Pokemon was added to party successfully.
-    #         False (Boolean): Pokemon was sent to box.
-
-    #     Returned if:
-    #         obj.party + <Pokemon>
-    #     """
-    #     if len(self.obj.db.party) < 6:
-    #         self.obj.db.party.append(pokemon)
-    #         return True
-    #     else:
-    #         self.obj.db.box.append(pokemon)
-    #         return False
-
-    # def remove(self, pokemon):
-    #     """
-    #     Remove Pokemon from party. If party would equal zero it fails.
-
-    #     Returns:
-    #         True (Boolean): Pokemon was removed from party successfully.
-    #         False (Boolean): Pokemon could not be removed.
-
-    #     Returned if:
-    #         obj.party.remove(<Pokemon>)
-    #     """
-    #     if len(self.obj.db.party) > 1:
-    #         self.obj.db.party.remove(pokemon)
-    #         return True
-    #     else:
-    #         return False
+        Returned if:
+            obj.magic.remove("Fire", 10)
+        """
+        try:
+            self.obj.db.magic[magic] = self.obj.db.magic[magic] - number
+        except:
+            msg = "Arguments passed to `MagicHandler.remove()` caused an error."
+            raise MagicException(msg)
+        
+        if self.obj.db.magic[magic] < 1:
+            self.obj.db.magic.remove(magic)
+        return True
 
     # def __sub__(self, pokemon):
     #     """
