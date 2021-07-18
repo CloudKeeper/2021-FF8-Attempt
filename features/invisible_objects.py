@@ -1,22 +1,25 @@
 """
 Invisible Objects
 
-Vanilla Evennia does not allow true invisibility out of the box.
+Vanilla Evennia does not allow true hidden objects by default.
 
-The 'view' lock will disallow viewing with "Could not view 'object(#9)'", 
-instead of 'Could not find 'bla''.
+The 'view' lock will prevent the object being displayed in a room's description
+and stop the look command with "Could not view 'object(#9)'", where as
+attempting to look at a non-existant object returns 'Could not find '<object>''.
 
-The 'get' lock will disallow getting with "Could not get 'object(#9)'", 
-instead of 'Could not find 'bla''.
+Likewise, the 'get' lock will disallow getting with "Could not get 'object(#9)'" 
+instead of 'Could not find '<object>''.
 
-Both of which give away the existance of our hidden object.
+Both of which give away the existance of a hidden object.
 
-Here we set up the infrastructure for a new lock "visible". When true, look 
-and get will return like it could not find the object at all.
+This Mixin modify's the objects hooks to fake the object not existing from
+the following commands:
+    -Look
+    -give
 
 SHORTCOMINGS:
 -Because the hooks don't know the command given, they will always use the key
-of the object, which may be different if they used an alias. Will also not
+of the object, which may be different if an alias was used. Will also not
 relay capitalisations of argument command like normal.
 -All other commands, not specifically allowed for, will betray the hidden
 object but they will hopefully happen less often.

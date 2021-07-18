@@ -21,9 +21,6 @@ Setup:
 Example usage:
     > self.magic.list
     [<magic>, <magic>]
-    > self.party.add(<Pokemon>)l
-    [<Pokemon>, <Pokemon>, <Pokemon>]
-
 """
 
 import time
@@ -133,8 +130,9 @@ class MagicHandler(object):
 
     Methods:
         list (list): list of magic with at least 1 
-        add (str): add a condition to the character's condition list.
-        remove (str): remove a condition to the character's condition list.
+        add (str): add x magic to given spell, or creates spell if didn't exist.
+        remove (str): remove x magic from given spell, or spell itself if at 0.
+        amount (int): Return amount of Magic left for given spell.
     """
 
     def __init__(self, obj):
@@ -211,32 +209,18 @@ class MagicHandler(object):
         """
         return bool(self.obj.db.magic)
 
-    # @property
-    # def fainted(self):
-    #     """
-    #     Returns fainted Pokemon in current party.
+    def amount(self, magic):
+        """
+        Returns the number of selected <magic> held by the Character.
 
-    #     Returns:
-    #         party (list): List of current fainted Pokemon objects in party.
-
-    #     Returned if:
-    #         obj.party.fainted
-    #     """
-    #     return [pokemon for pokemon in self.obj.db.party if not pokemon.health]
-
-    # @property
-    # def box(self):
-    #     """
-    #     Returns Pokemon in box.
-
-    #     Returns:
-    #         box (list): List of Pokemon objects stored in box.
-
-    #     Returned if:
-    #         obj.party.box
-    #     """
-    #     return self.obj.db.box
-
+        Returned if:
+            obj.magic.amount("Fire")
+        """
+        try:
+            return self.obj.db.magic[magic]
+        except:
+            return 0
+        
     def add(self, magic, number):
         """
         Increase selected <magic> by <number> respecting limit of 100.

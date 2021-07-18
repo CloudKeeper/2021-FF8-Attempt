@@ -1,3 +1,25 @@
+# 18/07/2021
+Shifted a few old features from the workshop. They appear complete. Will just
+need to test them, like I need to test all of the features so far.
+
+Next:
+ -Draw Command & related.
+ -See through exit levels. (just description / whole description / custom)
+
+# 18/07/2021
+Mocked up a quick non-interactive check on the character.search() method.
+
+Although it may not be the best solution for objects that need to be interacted
+with by one command and not others, because search will prevent it being 
+interacted with. I guess if there is a unique case I coudl circumvent search
+all together in that specific command or use a global search.
+
+# 18/07/2021
+Added the Amount method to the Magic Handler. The last of the basic Methods
+I can forsee I'll require.
+
+Next I think I'll work on the draw command.
+
 # 17/07/2021
 Continued work on the Magic Handler by adding some basic methods.
 
