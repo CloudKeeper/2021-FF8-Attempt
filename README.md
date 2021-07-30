@@ -1,3 +1,8 @@
+# 30/07/2021
+I made up two batchcode structes. One for the full Balamb garden, and one 
+greatly reduced Balamb Garden, removing the superfluous thorough-fare locations
+which can be added later if required.
+
 # 18/07/2021
 Shifted a few old features from the workshop. They appear complete. Will just
 need to test them, like I need to test all of the features so far.
